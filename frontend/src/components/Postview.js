@@ -3,7 +3,7 @@ import { Link} from "react-router-dom";
 import { connect } from "react-redux";
 import CommentList from './CommentList';
 import { bindActionCreators } from "redux";
-import { setCommentSort, fetchPost} from "../actions/index";
+import { setCommentSort, fetchPost, fetchComments} from "../actions/index";
 import axios from 'axios';
 import {api} from '../utils/Constants';
 import { getHeaders } from '../utils/AuthorizationHelper';
@@ -11,6 +11,11 @@ import { getHeaders } from '../utils/AuthorizationHelper';
 class Postview extends Component {
     componentDidMount() {
         this.handleSortChange = this.handleSortChange.bind(this);
+    }
+
+    clicked(id) {
+        this.props.fetchPost(id);
+        this.props.fetchComments(id);
     }
 
     voted(post, option) {
@@ -35,7 +40,6 @@ class Postview extends Component {
     }
 
     render() {
-        console.log('props = ', this.props);
         const myPost = Object.values(this.props.post)[0];
         if(!myPost) {
             return(null);
@@ -50,7 +54,9 @@ class Postview extends Component {
                         <div>{myPost.body}</div>
                         <div className="margin-bottom10">{myPost.author}</div>
                         <div className="edit-buttons">
-                            <Link to={`/${myPost.category}/${myPost.id}/edit`} className="btn btn-primary margin-right10"><i className="fa fa-pencil" aria-hidden="true"></i></Link>
+                            <Link to={`/${myPost.category}/${myPost.id}/edit`} className="btn btn-primary margin-right10" onClick={() => this.clicked(myPost.id)}>
+                                <i className="fa fa-pencil" aria-hidden="true"></i>
+                            </Link>
                             <Link to={`/`} className="btn btn-danger" onClick={() => this.deletePost(myPost)}>
                                 <i className="fa fa-trash-o" aria-hidden="true"></i>
                             </Link>
@@ -100,7 +106,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ setCommentSort, fetchPost }, dispatch);
+    return bindActionCreators({ setCommentSort, fetchPost, fetchComments }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Postview);
