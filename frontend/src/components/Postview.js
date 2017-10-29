@@ -10,6 +10,8 @@ import { getHeaders } from '../utils/AuthorizationHelper';
 
 class Postview extends Component {
     componentDidMount() {
+        console.log("Running component did mount");
+        console.log('this', this);
         this.handleSortChange = this.handleSortChange.bind(this);
     }
 
@@ -40,6 +42,7 @@ class Postview extends Component {
 
     render() {
         const myPost = Object.values(this.props.post)[0];
+        console.log('myPost', myPost);
         if(!myPost) {
             return(null);
         } else {
