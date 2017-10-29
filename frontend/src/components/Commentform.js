@@ -95,7 +95,7 @@ class Commentform extends Component {
 
         return(
             <div className="container">
-                {this.state.redirect && <Redirect to={`/${this.props.selectedCategory}/${myPost.id}`} />}
+                {this.state.redirect && <Redirect to={`/${myPost.category}/${myPost.id}`} />}
                 <div className="col-md-12 text-center">
                     {this.state.isNew ? <h3>New comment</h3> : <h3>Edit comment</h3>}
                 </div>
@@ -110,7 +110,7 @@ class Commentform extends Component {
                         <input type="text" value={this.state.authorValue} size="95"
                                onChange={this.handleAuthorChange} placeholder="author name"/>
                     </div>
-                    <Link to={`/${this.props.selectedCategory}/${myPost.id}`} className="btn btn-primary margin-right10">Cancel</Link>
+                    <Link to={`/${myPost.category}/${myPost.id}`} className="btn btn-primary margin-right10">Cancel</Link>
                     <input className="btn btn-primary" type="submit" value="Save" />
                 </form>
             </div>

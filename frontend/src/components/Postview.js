@@ -15,7 +15,6 @@ class Postview extends Component {
 
     clicked(id) {
         this.props.fetchPost(id);
-        this.props.fetchComments(id);
     }
 
     voted(post, option) {
