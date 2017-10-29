@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchComment, fetchComments } from "../actions/index";
@@ -16,7 +16,9 @@ class CommentListItem extends Component {
     }
 
     clicked(id) {
-        this.props.fetchComment(id);
+        this.props.fetchComment(id).then((response) => {
+            this.setState({ redirect: true });
+        });
     }
 
     voted(option) {
@@ -34,17 +36,17 @@ class CommentListItem extends Component {
     render() {
         return(
             <li className="list-group-item clearfix" key={this.props.comment.id}>
-
+                {this.state.redirect && <Redirect to={`/comments/${this.props.comment.id}/edit`} />}
                 <div className="margin-bottom10">
                     {this.props.comment.author}
                     <br/>
                     {this.props.comment.body}
                 </div>
                 <div className="edit-buttons">
-                    <Link to={`/comments/${this.props.comment.id}/edit`} className="btn btn-primary margin-right10"
+                    <button className="btn btn-primary margin-right10"
                           onClick={() => this.clicked(this.props.comment.id)}>
                         <i className="fa fa-pencil" aria-hidden="true"></i>
-                    </Link>
+                    </button>
                     <button className="btn btn-danger" onClick={() => this.deleteComment(this.props.comment.id)}>
                         <i className="fa fa-trash-o" aria-hidden="true"></i>
                     </button>

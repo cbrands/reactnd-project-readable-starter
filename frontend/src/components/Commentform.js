@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import { newComment, editComment } from "../actions/index";
+import {newComment, editComment, fetchComments} from "../actions/index";
 import generateUUID from '../utils/UuidGenerator';
 import isEmpty from '../utils/EmptyCheck';
 
-class Postform extends Component {
+class Commentform extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,11 +26,14 @@ class Postform extends Component {
             isNew = true;
         } else {
             isNew = false;
+            this.fill();
         }
         this.setState({ isNew });
+
     }
 
-    componentDidUpdate() {
+    fill() {
+        console.log('comment = ', this.props);
         if(!isEmpty(this.props.comment)) {
             if(this.state.bodyValue === ''){
                 let myComment = Object.values(this.props.comment)[0];
@@ -41,6 +44,10 @@ class Postform extends Component {
                 this.setState({authorValue: myComment.author});
             }
         }
+    }
+
+    componentDidUpdate() {
+        this.fill();
     }
 
     completeComment() {
@@ -79,13 +86,16 @@ class Postform extends Component {
         } else {
             this.props.editComment(myComment);
         }
+        this.props.fetchComments(myComment.parentId);
         this.setState({ redirect: true });
     }
 
     render(){
+        const myPost = Object.values(this.props.post)[0];
+
         return(
             <div className="container">
-                {this.state.redirect && <Redirect to={'/'} />}
+                {this.state.redirect && <Redirect to={`/${this.props.selectedCategory}/${myPost.id}`} />}
                 <div className="col-md-12 text-center">
                     {this.state.isNew ? <h3>New comment</h3> : <h3>Edit comment</h3>}
                 </div>
@@ -100,7 +110,7 @@ class Postform extends Component {
                         <input type="text" value={this.state.authorValue} size="95"
                                onChange={this.handleAuthorChange} placeholder="author name"/>
                     </div>
-                    <Link to={"/"} className="btn btn-primary margin-right10">Cancel</Link>
+                    <Link to={`/${this.props.selectedCategory}/${myPost.id}`} className="btn btn-primary margin-right10">Cancel</Link>
                     <input className="btn btn-primary" type="submit" value="Save" />
                 </form>
             </div>
@@ -111,12 +121,13 @@ class Postform extends Component {
 function mapStateToProps(state) {
     return {
         post: state.post,
-        comment: state.comment
+        comment: state.comment,
+        selectedCategory: state.selectedCategory
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ newComment, editComment }, dispatch);
+    return bindActionCreators({ newComment, editComment, fetchComments }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Postform);
+export default connect(mapStateToProps, mapDispatchToProps)(Commentform);
