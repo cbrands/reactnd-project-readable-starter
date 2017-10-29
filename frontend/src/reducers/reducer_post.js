@@ -5,7 +5,7 @@ export default function(state = {}, action) {
         case NEW_POST:
         case EDIT_POST:
         case FETCH_POST:
-            return { ...state, [action.payload.data.id]: action.payload.data };
+            return { [action.payload.data.id]: action.payload.data };
         default:
             return state;
     }

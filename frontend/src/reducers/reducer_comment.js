@@ -5,7 +5,7 @@ export default function(state = {}, action) {
         case NEW_COMMENT:
         case EDIT_COMMENT:
         case FETCH_COMMENT:
-            return { ...state, [action.payload.data.id]: action.payload.data };
+            return { [action.payload.data.id]: action.payload.data };
         default:
             return state;
     }
