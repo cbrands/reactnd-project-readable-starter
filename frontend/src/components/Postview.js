@@ -10,8 +10,6 @@ import { getHeaders } from '../utils/AuthorizationHelper';
 
 class Postview extends Component {
     componentDidMount() {
-        console.log("Running component did mount");
-        console.log('this', this);
         this.handleSortChange = this.handleSortChange.bind(this);
     }
 
@@ -42,7 +40,6 @@ class Postview extends Component {
 
     render() {
         const myPost = Object.values(this.props.post)[0];
-        console.log('myPost', myPost);
         if(!myPost) {
             return(null);
         } else {
@@ -82,7 +79,7 @@ class Postview extends Component {
                             <Link to={'/comments/new'} className="btn btn-primary margin-right10">
                                 New Comment <i className="fa fa-plus" aria-hidden="true"></i>
                             </Link>
-                            <label className="btn btn-primary">
+                            <label className="btn">
                                 Sort option:
                                 <select className="btn btn-primary" value={this.props.commentSort} onChange={this.handleSortChange}>
                                     <option value="date">Sort by date</option>

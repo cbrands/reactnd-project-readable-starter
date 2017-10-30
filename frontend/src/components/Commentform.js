@@ -33,7 +33,6 @@ class Commentform extends Component {
     }
 
     fill() {
-        console.log('comment = ', this.props);
         if(!isEmpty(this.props.comment)) {
             if(this.state.bodyValue === ''){
                 let myComment = Object.values(this.props.comment)[0];
@@ -44,6 +43,11 @@ class Commentform extends Component {
                 this.setState({authorValue: myComment.author});
             }
         }
+    }
+
+    clicked(id) {
+        //this.props.fetchPost(id);
+        //this.props.fetchComments(id);
     }
 
     componentDidUpdate() {
@@ -110,7 +114,7 @@ class Commentform extends Component {
                         <input type="text" value={this.state.authorValue} size="95"
                                onChange={this.handleAuthorChange} placeholder="author name"/>
                     </div>
-                    <Link to={`/${myPost.category}/${myPost.id}`} className="btn btn-primary margin-right10">Cancel</Link>
+                    <Link to={`/${myPost.category}/${myPost.id}`} className="btn btn-primary margin-right10" onClick={() => this.clicked(this.props.post.id)}>Cancel</Link>
                     <input className="btn btn-primary" type="submit" value="Save" />
                 </form>
             </div>

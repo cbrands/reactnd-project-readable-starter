@@ -53,7 +53,7 @@ class Mainview extends Component {
                                 New Post <i className="fa fa-plus" aria-hidden="true"></i>
                             </Link>
                         }
-                        <label className="btn btn-primary">
+                        <label className="btn">
                             Sort option:
                             <select className="btn btn-primary" value={this.props.postSort} onChange={this.handleSortChange}>
                                 <option value="date">Sort by date</option>
