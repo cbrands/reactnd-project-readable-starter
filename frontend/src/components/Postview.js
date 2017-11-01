@@ -11,6 +11,7 @@ import { getHeaders } from '../utils/AuthorizationHelper';
 class Postview extends Component {
     componentDidMount() {
         this.handleSortChange = this.handleSortChange.bind(this);
+        this.setState({ commentcounter: 0 })
     }
 
     clicked(id) {
@@ -25,6 +26,14 @@ class Postview extends Component {
 
     handleSortChange(event) {
         this.props.setCommentSort(event.target.value);
+    }
+
+    commentsCounter(postId){
+        axios.get(`${api}/posts/${postId}/comments`, getHeaders()).then((response) =>  {
+            if(this.state.commentcounter !== response.data.length) {
+                this.setState({commentcounter: response.data.length});
+            }
+        });
     }
 
     deletePost(post) {
@@ -43,6 +52,7 @@ class Postview extends Component {
         if(!myPost) {
             return(null);
         } else {
+            this.commentsCounter(myPost.id);
             return (
                 <div className="container">
                     <div className="col-md-12 text-center">
@@ -59,6 +69,10 @@ class Postview extends Component {
                             <Link to={`/`} className="btn btn-danger" onClick={() => this.deletePost(myPost)}>
                                 <i className="fa fa-trash-o" aria-hidden="true"></i>
                             </Link>
+                            <span className="comments">
+                                <i className="fa fa-comments" aria-hidden="true"></i>
+                                <span className="comments-distance">{this.state.commentcounter}</span>
+                            </span>
                         </div>
                         <div className="vote-buttons">
                             <button className="btn btn-primary margin-right10" onClick={() => this.voted(myPost, 'downVote')}>

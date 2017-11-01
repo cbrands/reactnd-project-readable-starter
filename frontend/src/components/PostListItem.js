@@ -10,7 +10,7 @@ import { getHeaders } from '../utils/AuthorizationHelper';
 class PostListItem extends Component {
 
     componentWillMount() {
-        this.setState({ commentcounter: 0 })
+        this.setState({ commentcounter: 0 });
     }
 
     clicked(id) {
@@ -52,7 +52,7 @@ class PostListItem extends Component {
     }
 
     render() {
-        this.commentsCounter(this.props.post.id)
+        this.commentsCounter(this.props.post.id);
         return(
             <li className="list-group-item clearfix" key={this.props.post.id}>
                 <div className="margin-bottom10">
