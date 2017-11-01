@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import Mainview from './Mainview';
 import Postview from './Postview';
 import Postform from './Postform';
@@ -8,11 +8,18 @@ import '../styles/app.css';
 
 class App extends Component {
 
+    homeClicked = () => {
+        this.props.selectCategory("home");
+        this.props.fetchPosts();
+    }
+
     render() {
         return (
             <div className="app container">
                 <header className="col-md-12 text-center">
-                    <h1>Readable 2</h1>
+                    <Link to={`/`} onClick={() => this.homeClicked()}>
+                        <h1>Readable</h1>
+                    </Link>
                 </header>
                 <Switch>
                     <Route path='/comments/new' component={Commentform} />
