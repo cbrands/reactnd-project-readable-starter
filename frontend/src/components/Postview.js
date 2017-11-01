@@ -50,7 +50,11 @@ class Postview extends Component {
     render() {
         const myPost = Object.values(this.props.post)[0];
         if(!myPost) {
-            return(null);
+            return(
+                <div className="container">
+                    <h3>Post not found.</h3>
+                </div>
+            );
         } else {
             this.commentsCounter(myPost.id);
             return (
@@ -71,7 +75,7 @@ class Postview extends Component {
                             </Link>
                             <span className="comments">
                                 <i className="fa fa-comments" aria-hidden="true"></i>
-                                <span className="comments-distance">{this.state.commentcounter}</span>
+                                <span className="comments-distance">{this.state ? this.state.commentcounter : 0}</span>
                             </span>
                         </div>
                         <div className="vote-buttons">
