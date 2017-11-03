@@ -58,7 +58,8 @@ Figure 4 shows the edit/new post screen.
 
 ## Edit / new comment
 Figure 5 shows the edit/new comment screen.
-![Figure 5](https://github.com/cbrands/reactnd-project-readable-starter/blob/master/frontend/figures/Figure_5.png "Figure 5")
+
+![Figure 5](https://github.com/cbrands/reactnd-project-readable-starter/blob/master/frontend/figures/figure_5.png "Figure 5")
 
 1. Url showing the comment id. For the new comment screen the url reads http://localhost:3000/comments/new
 2. Reads "Edit comment" for the edit screen "New comment" for the new comment screen.
