@@ -47,7 +47,21 @@ The postdetail view is depicted in figure 3.
 8. Edit and delete buttons
 
 ## Edit / new post
+Figure 4 shows the edit/new post screen.
+![Figure 4](https://github.com/cbrands/reactnd-project-readable-starter/blob/master/frontend/figures/Figure_4.png "Figure 4")
+
+1. Url showing category, post id and the word "edit". For the new post screen the url is http://localhost:3000/${category}/new
+2. Reads "Edit post" for the edit screen "New post" for the new post screen.
+3. Input fields for Title, body, and author.
+4. Cancel button.
+5. Save button.
 
 ## Edit / new comment
+Figure 5 shows the edit/new comment screen.
+![Figure 5](https://github.com/cbrands/reactnd-project-readable-starter/blob/master/frontend/figures/Figure_5.png "Figure 5")
 
-https://github.com/cbrands/reactnd-project-readable-starter/blob/master/frontend/figures/Figure_1.png
+1. Url showing the comment id. For the new comment screen the url reads http://localhost:3000/comments/new
+2. Reads "Edit comment" for the edit screen "New comment" for the new comment screen.
+3. Input fields for comment, and author.
+4. Cancel button.
+5. Save button.
